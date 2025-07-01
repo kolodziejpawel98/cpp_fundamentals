@@ -1,0 +1,5 @@
+/build/
+/extern/googletest/build/
+/*.exe
+/*.obj
+/*.o
