@@ -64,6 +64,49 @@ TEST(ptr_ref_const, pushBackSameValue)
     }
 }
 
+TEST(ptr_ref_const, copyAssignmentOperator)
+{
+    IntVector vec1;
+    vec1.push_back(1);
+    vec1.push_back(2);
+    vec1.push_back(3);
+
+    IntVector vec2;
+    vec2.push_back(10);
+
+    vec2 = vec1;
+
+    EXPECT_EQ(vec2.size(), vec1.size());
+    for (size_t i = 0; i < vec1.size(); ++i)
+    {
+        EXPECT_EQ(vec2.get(i), vec1.get(i));
+    }
+
+    vec2 = vec2;
+    EXPECT_EQ(vec2.size(), vec1.size());
+    for (size_t i = 0; i < vec2.size(); ++i)
+    {
+        EXPECT_EQ(vec2.get(i), vec1.get(i));
+    }
+}
+
+TEST(ptr_ref_const, copyConstructorCreatesDeepCopy)
+{
+    IntVector original;
+    original.push_back(42);
+    original.push_back(99);
+
+    IntVector copy = original;
+
+    EXPECT_EQ(copy.size(), original.size());
+    EXPECT_EQ(copy.get(0), original.get(0));
+    EXPECT_EQ(copy.get(1), original.get(1));
+
+    original.push_back(123);
+    EXPECT_EQ(original.size(), 3);
+    EXPECT_EQ(copy.size(), 2);
+}
+
 // ##############################
 
 int main(int argc, char **argv)

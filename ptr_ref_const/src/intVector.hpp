@@ -6,8 +6,8 @@ class IntVector
 {
 public:
     IntVector();
-    // IntVector(const IntVector& other);
-    // IntVector& operator=(const IntVector& other);
+    IntVector(const IntVector &);
+    IntVector &operator=(const IntVector &);
     ~IntVector();
     void push_back(int);
     int get(int) const;

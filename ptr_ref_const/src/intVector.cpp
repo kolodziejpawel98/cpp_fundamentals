@@ -3,6 +3,31 @@
 IntVector::IntVector()
     : data_(nullptr), size_(0) {}
 
+IntVector &IntVector::operator=(const IntVector &other)
+{
+    if (this != &other)
+    {
+        size_ = other.size_;
+        delete[] data_;
+        data_ = new int[size_];
+        for (int i = 0; i < size_; i++)
+        {
+            data_[i] = other.data_[i];
+        }
+    }
+    return *this;
+}
+
+IntVector::IntVector(const IntVector &other)
+{
+    size_ = other.size_;
+    data_ = new int[size_];
+    for (int i = 0; i < size_; i++)
+    {
+        data_[i] = other.data_[i];
+    }
+}
+
 void IntVector::push_back(int value)
 {
     int *new_data = new int[size_ + 1];
