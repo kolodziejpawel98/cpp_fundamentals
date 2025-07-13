@@ -1,27 +1,29 @@
-🧠 Zadanie: Hierarchia pojazdów i centrum serwisowe
-🎯 Cel:
+🧠 Task: Vehicle Hierarchy and Service Center
+🎯 Goal:
 
-Stworzyć hierarchię klas reprezentujących różne typy pojazdów, zastosować dziedziczenie, polimorfizm oraz użyć wirtualnych destruktorów.
-📋 Treść zadania:
+Create a class hierarchy representing different types of vehicles, apply inheritance, polymorphism, and use virtual destructors.
+📋 Task Description:
 
-Stwórz hierarchię klas reprezentującą różne pojazdy, które mogą zostać zarejestrowane w centrum serwisowym.
-1. Klasa bazowa Vehicle
+Design a class hierarchy representing various vehicles that can be registered in a service center.
+1. Base Class: Vehicle
 
-    Zawiera:
+Contains:
 
-        std::string brand — marka pojazdu
+    std::string brand — vehicle brand
 
-        std::string model
+    std::string model
 
-        int year
+    int year
 
-    Wirtualną metodę void printInfo() const — wypisuje dane pojazdu
+Also includes:
 
-    Wirtualny destruktor (!)
+    A virtual method void printInfo() const — prints vehicle details
 
-2. Klasy pochodne: Car, Motorcycle, Truck
+    A virtual destructor (!)
 
-Każda dziedziczy po Vehicle i dodaje własne pole oraz nadpisuje metodę printInfo():
+2. Derived Classes: Car, Motorcycle, Truck
+
+Each inherits from Vehicle, adds its own field, and overrides printInfo():
 
     Car
 
@@ -35,36 +37,34 @@ Każda dziedziczy po Vehicle i dodaje własne pole oraz nadpisuje metodę printI
 
         double maxLoadTons
 
-3. Klasa ServiceCenter
+3. Class ServiceCenter
 
-    Przechowuje pojazdy w wektorze wskaźników: std::vector<Vehicle*>
+Stores vehicles using a vector of pointers: std::vector<Vehicle*>
 
-    Metoda addVehicle(Vehicle*) — dodaje pojazd do systemu
+    Method addVehicle(Vehicle*) — adds a vehicle to the system
 
-    Metoda printAll() — wypisuje dane wszystkich pojazdów (polimorfizm!)
+    Method printAll() — prints all vehicles (via polymorphism!)
 
-    Destruktor — usuwa wszystkie wskaźniki (symuluje zarządzanie pamięcią)
+    Destructor — deletes all pointers (simulates memory management)
 
-✅ Wymagania techniczne:
+✅ Technical Requirements:
 
-    Użyj polimorfizmu w metodzie printInfo()
+    Use polymorphism in the printInfo() method
 
-    Upewnij się, że destruktory są wirtualne, by uniknąć wycieków
+    Ensure destructors are virtual to avoid memory leaks
 
-    Na koniec, przetestuj wszystko w funkcji main():
+    Finally, test everything in the main() function:
 
-        Utwórz 2–3 obiekty różnych klas
+        Create 2–3 objects of different classes
 
-        Dodaj je do ServiceCenter
+        Add them to ServiceCenter
 
-        Wywołaj printAll()
+        Call printAll()
 
-🔁 Rozszerzenia (opcjonalnie):
+🔁 Optional Extensions:
 
-    Zmień surowe wskaźniki na std::unique_ptr<Vehicle>
+    Replace raw pointers with std::unique_ptr<Vehicle>
 
-    Dodaj funkcję usuwania pojazdu po ID
+    Add a function to remove a vehicle by ID
 
-    Użyj typeid lub dynamic_cast by sprawdzić typ konkretnego pojazdu
-
-Daj znać, jeśli chcesz od razu szkic rozwiązania lub wersję z użyciem smart pointerów.
+    Use typeid or dynamic_cast to check a vehicle's actual type

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "intVector.hpp"
 
-TEST(ptr_ref_const, checkVectorSize)
+TEST(exercise_1, checkVectorSize)
 {
     IntVector vec;
     vec.push_back(13);
@@ -10,7 +10,7 @@ TEST(ptr_ref_const, checkVectorSize)
     EXPECT_EQ(vec.size(), 2);
 }
 
-TEST(ptr_ref_const, checkReturnedElement)
+TEST(exercise_1, checkReturnedElement)
 {
     IntVector vec;
     vec.push_back(13);
@@ -19,7 +19,7 @@ TEST(ptr_ref_const, checkReturnedElement)
     EXPECT_EQ(vec.get(1), 14);
 }
 
-TEST(ptr_ref_const, checkMultiplePushBack)
+TEST(exercise_1, checkMultiplePushBack)
 {
     IntVector vec;
     for (int i = 0; i < 100; ++i)
@@ -30,27 +30,27 @@ TEST(ptr_ref_const, checkMultiplePushBack)
     }
 }
 
-TEST(ptr_ref_const, getThrowsOnNegativeIndex)
+TEST(exercise_1, getThrowsOnNegativeIndex)
 {
     IntVector vec;
     vec.push_back(10);
     EXPECT_THROW(vec.get(-1), std::out_of_range);
 }
 
-TEST(ptr_ref_const, getThrowsOnTooLargeIndex)
+TEST(exercise_1, getThrowsOnTooLargeIndex)
 {
     IntVector vec;
     vec.push_back(10);
     EXPECT_THROW(vec.get(1), std::out_of_range);
 }
 
-TEST(ptr_ref_const, getFromEmptyVectorThrows)
+TEST(exercise_1, getFromEmptyVectorThrows)
 {
     IntVector vec;
     EXPECT_THROW(vec.get(0), std::out_of_range);
 }
 
-TEST(ptr_ref_const, pushBackSameValue)
+TEST(exercise_1, pushBackSameValue)
 {
     IntVector vec;
     for (int i = 0; i < 5; ++i)
@@ -64,7 +64,7 @@ TEST(ptr_ref_const, pushBackSameValue)
     }
 }
 
-TEST(ptr_ref_const, copyAssignmentOperator)
+TEST(exercise_1, copyAssignmentOperator)
 {
     IntVector vec1;
     vec1.push_back(1);
@@ -90,7 +90,7 @@ TEST(ptr_ref_const, copyAssignmentOperator)
     }
 }
 
-TEST(ptr_ref_const, copyConstructorCreatesDeepCopy)
+TEST(exercise_1, copyConstructorCreatesDeepCopy)
 {
     IntVector original;
     original.push_back(42);
