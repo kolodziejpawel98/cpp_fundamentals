@@ -20,6 +20,7 @@ gtest_discover_tests(int_vector_tests)
 add_executable(exercise_2_tests
     exercise_2/src/Vehicle.cpp
     exercise_2/src/Vehicles.cpp
+    exercise_2/src/ServiceCenter.cpp
     exercise_2/test/exercise_2_tests.cpp
 )
 target_include_directories(exercise_2_tests PRIVATE exercise_2/src)
