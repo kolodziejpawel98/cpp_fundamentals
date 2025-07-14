@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <memory>
 #include <vector>
 #include "Vehicles.hpp"
 #pragma once
@@ -9,12 +10,20 @@ class ServiceCenter
 {
 public:
     ServiceCenter() = default;
-    void addVehicle(Vehicle *vehicle) // smart pointers needed, I know
+    void addVehicle(std::unique_ptr<Vehicle> vehicle)
     {
-        vehicles.push_back(vehicle);
+        if (vehicle)
+        {
+            vehicles.push_back(std::move(vehicle));
+        }
+        else
+        {
+            throw std::invalid_argument("Vehicle is nullptr");
+        }
     }
 
-    std::string printAll()
+    std::string printAll() const
+
     {
         std::string output = "";
         for (auto &vehicle : vehicles)
@@ -24,15 +33,12 @@ public:
         return output;
     }
 
-    ~ServiceCenter()
+    int getVehiclesSize() const
     {
-        for (auto &vehicle : vehicles)
-        {
-            delete vehicle;
-            vehicle = nullptr;
-        }
-    };
+        return vehicles.size();
+    }
+    ~ServiceCenter() = default;
 
 private:
-    std::vector<Vehicle *> vehicles;
+    std::vector<std::unique_ptr<Vehicle>> vehicles;
 };

@@ -2,6 +2,7 @@
 #include "Vehicles.hpp"
 #include "ServiceCenter.hpp"
 #include <sstream>
+#include <memory>
 #include <typeinfo>
 
 TEST(VehicleTest, getterMethods)
@@ -37,9 +38,23 @@ TEST(VehicleTest, negativeYear)
 TEST(VehicleTest, serviceCenter)
 {
     ServiceCenter serviceCenter{};
-    serviceCenter.addVehicle(new Car("Toyota", "Corolla", 2015, 4));
-    serviceCenter.addVehicle(new Motorcycle("Suzuki", "xyz", 2011, true));
-    serviceCenter.addVehicle(new Truck("Volvo", "xyz", 2011, 0.1));
+    serviceCenter.addVehicle(std::make_unique<Car>("Toyota", "Corolla", 2015, 4));
+    serviceCenter.addVehicle(std::make_unique<Motorcycle>("Suzuki", "xyz", 2011, true));
+    serviceCenter.addVehicle(std::make_unique<Truck>("Volvo", "xyz", 2011, 0.1));
     std::string output = "placeholder Car\nplaceholder Motorcycle\nplaceholder Truck\n";
     EXPECT_EQ(serviceCenter.printAll(), output);
+}
+
+TEST(VehicleTest, checkAddingPointerTwoTimes)
+{
+    ServiceCenter serviceCenter{};
+    std::unique_ptr<Vehicle> car = std::make_unique<Car>("Toyota", "Corolla", 2015, 4);
+    serviceCenter.addVehicle(std::move(car));
+    EXPECT_TRUE(car == nullptr);
+    EXPECT_EQ(serviceCenter.getVehiclesSize(), 1);
+    EXPECT_THROW(
+        {
+            serviceCenter.addVehicle(std::move(car));
+        },
+        std::invalid_argument);
 }
