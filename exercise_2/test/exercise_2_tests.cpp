@@ -58,3 +58,16 @@ TEST(VehicleTest, checkAddingPointerTwoTimes)
         },
         std::invalid_argument);
 }
+
+TEST(VehicleTest, checkingDynamicCast)
+{
+    std::unique_ptr<Vehicle> car = std::make_unique<Car>("Toyota", "Corolla", 2015, 4);
+    std::unique_ptr<Vehicle> motorcycle = std::make_unique<Motorcycle>("Suzuki", "xyz", 2011, true);
+    std::unique_ptr<Vehicle> truck = std::make_unique<Truck>("Volvo", "xyz", 2011, 0.1);
+    Vehicle *carPtr = car.get();
+    Vehicle *motorcyclePtr = motorcycle.get();
+    Vehicle *truckPtr = truck.get();
+    ASSERT_NE(dynamic_cast<Car *>(carPtr), nullptr);
+    ASSERT_EQ(dynamic_cast<Motorcycle *>(carPtr), nullptr);
+    ASSERT_EQ(dynamic_cast<Truck *>(carPtr), nullptr);
+}
