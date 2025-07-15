@@ -26,3 +26,10 @@ add_executable(exercise_2_tests
 target_include_directories(exercise_2_tests PRIVATE exercise_2/src)
 target_link_libraries(exercise_2_tests gtest_main)
 gtest_discover_tests(exercise_2_tests)
+
+add_executable(exercise_3_tests
+    exercise_3/test/exercise_3_tests.cpp
+)
+target_include_directories(exercise_3_tests PRIVATE exercise_3/src)
+target_link_libraries(exercise_3_tests gtest_main)
+gtest_discover_tests(exercise_3_tests)
