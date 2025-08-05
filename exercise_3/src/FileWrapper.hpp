@@ -9,27 +9,42 @@ class FileWrapper
 public:
     FileWrapper(const char *pathToOpen)
     {
-        fp = std::fopen(pathToOpen, "w+");
-        if (!fp)
+        file = std::fopen(pathToOpen, "w+");
+        if (!file)
         {
             std::perror("File opening failed");
         }
     }
 
-    FileWrapper(FILE *fp) noexcept
+    // FileWrapper(FILE *file) noexcept
+    // {
+    //     this->file = file;
+    //     file = nullptr;
+    // }
+
+    FileWrapper(FileWrapper &&other) noexcept
     {
-        this->fp = fp;
-        fp = nullptr;
+        this->file = other.file;
+        other.file = nullptr;
     }
 
     bool isOpen() const
     {
-        return (fp == nullptr) ? false : true;
+        return (file == nullptr) ? false : true;
+    }
+
+    bool operator==(const FileWrapper &other) const
+    {
+        if (this->file == other.file)
+        {
+            return true;
+        }
+        return false;
     }
 
     void write(const std::string &text)
     {
-        if (!std::feof(fp))
+        if (!std::feof(file))
         {
             std::cout << "File opened" << std::endl;
         }
@@ -37,9 +52,9 @@ public:
 
     ~FileWrapper()
     {
-        std::fclose(fp);
+        std::fclose(file);
     }
 
 private:
-    FILE *fp;
+    FILE *file;
 };
