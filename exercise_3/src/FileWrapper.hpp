@@ -28,6 +28,10 @@ public:
         other.file = nullptr;
     }
 
+    // FileWrapper(const FileWrapper &) = delete;
+    // FileWrapper &operator=(const FileWrapper &) = delete;
+    // ???????
+
     bool isOpen() const
     {
         return (file == nullptr) ? false : true;
@@ -52,7 +56,10 @@ public:
 
     ~FileWrapper()
     {
-        std::fclose(file);
+        if (file != nullptr)
+        {
+            std::fclose(file);
+        }
     }
 
 private:
