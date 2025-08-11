@@ -19,3 +19,9 @@ TEST(fileWrapperTest, checkIfCOpyingIsBanned)
     EXPECT_FALSE(std::is_copy_constructible_v<FileWrapper>);
     EXPECT_FALSE(std::is_copy_assignable_v<FileWrapper>);
 }
+
+TEST(fileWrapperTest, writingToFile)
+{
+    FileWrapper fileWrapper_1("sample_file.txt");
+    fileWrapper_1.write("hello world!");
+}

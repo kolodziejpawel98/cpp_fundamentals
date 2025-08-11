@@ -55,11 +55,16 @@ public:
         return *this;
     }
 
-    void write(const std::string &text)
+    void write(const std::string &text) // IN PROGRESS
     {
-        if (!std::feof(file))
+        if (file != nullptr)
         {
-            std::cout << "File opened" << std::endl;
+            std::size_t written = std::fwrite(&text, 1, text.size(), file);
+
+            if (written != text.size())
+            {
+                std::perror("Writing error");
+            }
         }
     }
 
