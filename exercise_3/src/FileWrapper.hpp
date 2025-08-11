@@ -28,9 +28,8 @@ public:
         other.file = nullptr;
     }
 
-    // FileWrapper(const FileWrapper &) = delete;
-    // FileWrapper &operator=(const FileWrapper &) = delete;
-    // ???????
+    FileWrapper(const FileWrapper &) = delete;
+    FileWrapper &operator=(const FileWrapper &) = delete;
 
     bool isOpen() const
     {
@@ -44,6 +43,16 @@ public:
             return true;
         }
         return false;
+    }
+
+    FileWrapper &operator=(FileWrapper &&other) noexcept
+    {
+        if (this != &other)
+        {
+            this->file = other.file;
+            other.file = nullptr;
+        }
+        return *this;
     }
 
     void write(const std::string &text)

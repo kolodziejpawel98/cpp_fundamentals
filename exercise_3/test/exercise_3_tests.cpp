@@ -14,6 +14,8 @@ TEST(fileWrapperTest, objectMoving)
 
 TEST(fileWrapperTest, checkIfCOpyingIsBanned)
 {
-    FileWrapper f1("sample_file.txt");
-    FileWrapper f2 = f1;
+    EXPECT_TRUE(std::is_move_constructible_v<FileWrapper>);
+    EXPECT_TRUE(std::is_move_assignable_v<FileWrapper>);
+    EXPECT_FALSE(std::is_copy_constructible_v<FileWrapper>);
+    EXPECT_FALSE(std::is_copy_assignable_v<FileWrapper>);
 }
