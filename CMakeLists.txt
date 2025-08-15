@@ -61,3 +61,11 @@ add_executable(week_1_day_1_tests
 target_include_directories(week_1_day_1_tests PRIVATE cpp_skills_training/week_1/day_1/src)
 target_link_libraries(week_1_day_1_tests gtest_main)
 # gtest_discover_tests(week_1_day_1_tests)
+
+add_executable(week_1_day_2_tests
+    cpp_skills_training/week_1/day_2/test/week_1_day_2_tests.cpp
+    cpp_skills_training/week_1/day_2/src/Buffer.cpp
+)
+target_include_directories(week_1_day_2_tests PRIVATE cpp_skills_training/week_1/day_2/src)
+target_link_libraries(week_1_day_2_tests gtest_main)
+# gtest_discover_tests(week_1_day_1_tests)
