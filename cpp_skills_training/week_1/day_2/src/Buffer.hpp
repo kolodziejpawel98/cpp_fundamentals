@@ -9,11 +9,7 @@
 class Buffer
 {
 public:
-    Buffer()
-    {
-        arraySize_ = 0;
-        array_ = nullptr;
-    };
+    Buffer() : arraySize_(0), array_(nullptr) {}
 
     Buffer(int size, int value)
     {
@@ -31,16 +27,48 @@ public:
         }
     }
 
-    Buffer(const Buffer &obj)
+    Buffer(const Buffer &obj) : arraySize_(obj.arraySize_), array_(nullptr)
     {
-        this->arraySize_ = obj.arraySize_;
-        if (this->arraySize_ == 0)
-            array_ = nullptr;
-        int *tmpArray = new int[this->arraySize_];
-        for (int i = 0; i < this->arraySize_; i++)
-            tmpArray = obj.array_;
-        array_ = tmpArray;
+        if (arraySize_ == 0)
+        {
+            return;
+        }
+        else
+        {
+            int *tmpArray = new int[arraySize_];
+            for (int i = 0; i < arraySize_; i++)
+                tmpArray[i] = obj.array_[i];
+            array_ = tmpArray;
+        }
     }
+
+    Buffer &operator=(const Buffer &obj)
+    {
+        if (this == &obj)
+            return *this;
+        if (obj.arraySize_ == 0)
+        {
+            delete[] array_;
+            array_ = nullptr;
+            arraySize_ = 0;
+            return *this;
+        }
+        int tmpSize = obj.arraySize_;
+        int *tmpArray = new int[tmpSize];
+        for (int i = 0; i < tmpSize; i++)
+        {
+            tmpArray[i] = obj.array_[i];
+        }
+
+        delete[] array_;
+        array_ = tmpArray;
+        arraySize_ = tmpSize;
+
+        return *this;
+    }
+
+    //  String5(String5&& other) noexcept
+    //   String5& operator=(String5&& other) noexcept
 
     ~Buffer()
     {
@@ -48,6 +76,6 @@ public:
     }
 
 private:
-    int *array_;
     int arraySize_;
+    int *array_;
 };
