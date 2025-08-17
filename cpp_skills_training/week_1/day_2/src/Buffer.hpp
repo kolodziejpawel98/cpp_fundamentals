@@ -67,8 +67,41 @@ public:
         return *this;
     }
 
-    //  String5(String5&& other) noexcept
-    //   String5& operator=(String5&& other) noexcept
+    // int main() {
+    //     String a{"Hello"};      // konstruktor
+    //     String b = a;           // konstruktor kopiujący
+    //     String c = String{"Hi"}; // konstruktor przenoszący
+
+    //     b = a;                  // przypisanie kopiujące
+    //     b = String{"World"};    // przypisanie przenoszące
+
+    //     String d{"Tmp"};
+    //     d = std::move(c);       // wymuszone przeniesienie
+    // }
+
+    Buffer(Buffer &&obj) noexcept : arraySize_(obj.arraySize_)
+    {
+        array_ = obj.array_;
+        obj.array_ = nullptr;
+        obj.arraySize_ = 0;
+    }
+
+    Buffer &operator=(Buffer &&obj) noexcept
+    {
+        if (this == &obj)
+            return *this;
+        delete[] array_;
+        array_ = obj.array_;
+        arraySize_ = obj.arraySize_;
+        obj.array_ = nullptr;
+        obj.arraySize_ = 0;
+        return *this;
+    }
+
+    int getArraySize()
+    {
+        return arraySize_;
+    }
 
     ~Buffer()
     {

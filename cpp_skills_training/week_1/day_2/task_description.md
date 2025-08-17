@@ -13,7 +13,8 @@ Zaimplementuj klasę Buffer zarządzającą dynamiczną tablicą int.
 Wymagane elementy: ctor domyślny, ctor(n, value), dtor, copy ctor, 
 
 ################################## poprawki: ##################################
-	Co dzieje się z początkowymi wartościami pól po wywołaniu konstruktora domyślnego? 	Czy destruktor ma wtedy na czym legalnie działać?
+	Co dzieje się z początkowymi wartościami pól po wywołaniu konstruktora domyślnego? 	
+Czy destruktor ma wtedy na czym legalnie działać?
     • Gdy rozmiar to 0, czy na pewno chcesz jeszcze coś alokować/kopiować? Pomyśl o „wczesnym wyjściu”.
     • W pętli kopiującej: czy zmieniasz wskaźnik, czy kopiujesz elementy pod wskaźnikami? Sprawdź, co dokładnie przypisujesz w każdym kroku.
     • Czy inwariant „array_ == nullptr ⇔ arraySize_ == 0” zawsze jest zachowany na końcu konstruktora?
