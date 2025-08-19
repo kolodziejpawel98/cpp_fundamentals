@@ -36,7 +36,7 @@ public:
         else
         {
             int *tmpArray = new int[arraySize_];
-            for (int i = 0; i < arraySize_; i++)
+            for (size_t i = 0; i < arraySize_; i++)
                 tmpArray[i] = obj.array_[i];
             array_ = tmpArray;
         }
@@ -67,18 +67,6 @@ public:
         return *this;
     }
 
-    // int main() {
-    //     String a{"Hello"};      // konstruktor
-    //     String b = a;           // konstruktor kopiujący
-    //     String c = String{"Hi"}; // konstruktor przenoszący
-
-    //     b = a;                  // przypisanie kopiujące
-    //     b = String{"World"};    // przypisanie przenoszące
-
-    //     String d{"Tmp"};
-    //     d = std::move(c);       // wymuszone przeniesienie
-    // }
-
     Buffer(Buffer &&obj) noexcept : arraySize_(obj.arraySize_)
     {
         array_ = obj.array_;
@@ -103,12 +91,44 @@ public:
         return arraySize_;
     }
 
+    const int *getData() const
+    {
+        return array_;
+    }
+
+    int operator[](size_t indexOfElement)
+    {
+        return array_[indexOfElement];
+    }
+
+    int at(size_t indexOfElement)
+    {
+        if (indexOfElement >= arraySize_)
+        {
+            throw std::out_of_range("Buffer::at – index out of range");
+        }
+        return array_[indexOfElement];
+    }
+
+    void push_back(int element)
+    {
+        int *newArray = new int[arraySize_ + 1];
+
+        for (size_t i = 0; i < arraySize_; i++)
+            newArray[i] = array_[i];
+        newArray[arraySize_] = element;
+
+        delete[] array_;
+        array_ = newArray;
+        arraySize_++;
+    }
+
     ~Buffer()
     {
         delete[] array_;
     }
 
 private:
-    int arraySize_;
+    size_t arraySize_;
     int *array_;
 };

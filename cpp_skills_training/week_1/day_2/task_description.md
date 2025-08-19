@@ -9,22 +9,8 @@ Co musi gwarantować silna/pośrednia słaba gwarancja wyjątku przy operacji pr
 
 Zadanie
 
-Zaimplementuj klasę Buffer zarządzającą dynamiczną tablicą int.
+Zaimplementuj klasę Buffer zarządzaj­ącą dynamiczną tablicą int.
 Wymagane elementy: ctor domyślny, ctor(n, value), dtor, copy ctor, 
-
-################################## poprawki: ##################################
-	Co dzieje się z początkowymi wartościami pól po wywołaniu konstruktora domyślnego? 	
-Czy destruktor ma wtedy na czym legalnie działać?
-    • Gdy rozmiar to 0, czy na pewno chcesz jeszcze coś alokować/kopiować? Pomyśl o „wczesnym wyjściu”.
-    • W pętli kopiującej: czy zmieniasz wskaźnik, czy kopiujesz elementy pod wskaźnikami? Sprawdź, co dokładnie przypisujesz w każdym kroku.
-    • Czy inwariant „array_ == nullptr ⇔ arraySize_ == 0” zawsze jest zachowany na końcu konstruktora?
-    • Zastanów się, co się stanie, jeśli alokacja/kopia rzuci wyjątek — w jakim stanie zostaje obiekt?
-    • Pomyśl o Rule of 5: skoro masz surowe new/delete, czy nie brakuje „reszty zestawu”?
-    • Czy self-copy (kopiowanie obiektu do samego siebie) jest możliwe w Twoim kodzie i jak na nie reagujesz?
-    • Czy inicjalizacja pól w listach inicjalizacyjnych nie byłaby bezpieczniejsza/czytelniejsza niż przypisania w ciele?
-    • Czy chcesz, by po błędzie kopiowania stan był niezmieniony (silna gwarancja), czy wystarczy podstawowa? Jak byś to osiągnął?
-
-
 
 move ctor, copy assign, move assign, size(), data(), operator[], at(), push_back(int), resize(size_t), swap(Buffer&), równość/nie-równość.
 
