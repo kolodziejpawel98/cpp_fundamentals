@@ -63,3 +63,5 @@ Silna gwarancja przez technikę copy-and-swap.
 Wewnętrzna „pojemność” i strategia realokacji.
 
 Iterator forward; testy z algorytmami STL.
+
+
