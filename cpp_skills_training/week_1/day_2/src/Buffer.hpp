@@ -9,7 +9,7 @@ class Buffer
 {
 public:
     Buffer();
-    Buffer(int, int);
+    Buffer(size_t, int);
     Buffer(const Buffer &);
     Buffer &operator=(const Buffer &);
     Buffer(Buffer &&) noexcept;

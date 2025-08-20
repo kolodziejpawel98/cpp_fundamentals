@@ -2,7 +2,7 @@
 
 Buffer::Buffer() : size_(0), array_(nullptr) {}
 
-Buffer::Buffer(int size, int value)
+Buffer::Buffer(size_t size, int value)
 {
     if (size != 0)
     {
@@ -44,7 +44,7 @@ Buffer &Buffer::operator=(const Buffer &obj)
         size_ = 0;
         return *this;
     }
-    int tmpSize = obj.size_;
+    size_t tmpSize = obj.size_;
     int *tmpArray = new int[tmpSize];
     for (size_t i = 0; i < tmpSize; i++)
         tmpArray[i] = obj.array_[i];
