@@ -15,7 +15,9 @@ struct Shape
 
 struct Rectangle : Shape
 {
+    Rectangle(double, double);
     virtual std::string name() const override;
+    virtual double area() const override;
 
 private:
     double width, height;
@@ -23,14 +25,22 @@ private:
 
 struct Circle : Shape
 {
+    Circle(double);
     virtual std::string name() const override;
+    virtual double area() const override;
 
 private:
     double radius;
 };
 
-struct Square final : Rectangle
-{
-};
+// struct Square final : Rectangle
+// {
+//     Square() {};
+// };
 
-extern std::vector<std::unique_ptr<Shape>> shapes;
+extern std::vector<std::unique_ptr<Shape>>
+    shapes;
+
+std::unique_ptr<Shape> makeShape(double, double);
+std::unique_ptr<Shape> makeShape(double);
+// std::unique_ptr<Shape> makeShape();
