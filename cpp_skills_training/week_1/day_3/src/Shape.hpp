@@ -6,6 +6,8 @@
 
 #pragma once
 
+const double PI = 3.14;
+
 struct Shape
 {
     Shape() = default;
@@ -17,8 +19,8 @@ struct Shape
 struct Rectangle : Shape
 {
     Rectangle(double, double);
-    virtual std::string name() const override;
-    virtual double area() const override;
+    std::string name() const override;
+    double area() const override;
 
 private:
     double width, height;
@@ -26,9 +28,9 @@ private:
 
 struct Circle : Shape
 {
-    Circle(double);
-    virtual std::string name() const override;
-    virtual double area() const override;
+    explicit Circle(double);
+    std::string name() const override;
+    double area() const override;
 
 private:
     double radius;
@@ -36,7 +38,8 @@ private:
 
 struct Square final : Rectangle
 {
-    Square(double);
+    explicit Square(double);
+    std::string name() const override;
 };
 
 enum class ShapeType
@@ -46,7 +49,6 @@ enum class ShapeType
     Square
 };
 
-extern std::vector<std::unique_ptr<Shape>>
-    shapes;
+extern std::vector<std::unique_ptr<Shape>> shapes;
 
 std::unique_ptr<Shape> makeShape(ShapeType, std::initializer_list<double>);
