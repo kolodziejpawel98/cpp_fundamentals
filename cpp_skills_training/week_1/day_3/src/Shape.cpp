@@ -30,20 +30,24 @@ double Circle::area() const
     return radius * radius * 3.14;
 }
 
-std::unique_ptr<Shape> makeShape(double width, double height)
-{
-    std::unique_ptr<Rectangle> rectangle = std::make_unique<Rectangle>(width, height);
-    return rectangle;
-}
+Square::Square(double width) : Rectangle(width, width) {};
 
-std::unique_ptr<Shape> makeShape(double radius)
+std::unique_ptr<Shape> makeShape(ShapeType shapeType, std::initializer_list<double> parameters)
 {
-    std::unique_ptr<Circle> circle = std::make_unique<Circle>(radius);
-    return circle;
+    if (shapeType == ShapeType::Rectangle)
+    {
+        auto iterator = parameters.begin();
+        std::unique_ptr<Rectangle> rectangle = std::make_unique<Rectangle>(*iterator, *(iterator + 1));
+        return rectangle;
+    }
+    else if (shapeType == ShapeType::Circle)
+    {
+        std::unique_ptr<Circle> circle = std::make_unique<Circle>(*parameters.begin());
+        return circle;
+    }
+    else
+    {
+        std::unique_ptr<Square> square = std::make_unique<Square>(*parameters.begin());
+        return square;
+    }
 }
-
-// std::unique_ptr<Shape> makeShape()
-// {
-//     std::unique_ptr<Square> square = std::make_unique<Square>();
-//     return square;
-// }

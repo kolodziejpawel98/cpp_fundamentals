@@ -8,6 +8,7 @@
 
 struct Shape
 {
+    Shape() = default;
     virtual std::string name() const;
     virtual double area() const = 0;
     virtual ~Shape();
@@ -33,14 +34,19 @@ private:
     double radius;
 };
 
-// struct Square final : Rectangle
-// {
-//     Square() {};
-// };
+struct Square final : Rectangle
+{
+    Square(double);
+};
+
+enum class ShapeType
+{
+    Rectangle,
+    Circle,
+    Square
+};
 
 extern std::vector<std::unique_ptr<Shape>>
     shapes;
 
-std::unique_ptr<Shape> makeShape(double, double);
-std::unique_ptr<Shape> makeShape(double);
-// std::unique_ptr<Shape> makeShape();
+std::unique_ptr<Shape> makeShape(ShapeType, std::initializer_list<double>);
