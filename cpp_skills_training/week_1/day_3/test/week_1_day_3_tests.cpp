@@ -24,7 +24,7 @@ TEST(week_1_day_3, areas)
 
     EXPECT_THROW((Rectangle{0, 0}), std::invalid_argument);
     EXPECT_THROW((Circle{-2}), std::invalid_argument);
-    EXPECT_THROW((Square{-2}), std::invalid_argucd Dement);
+    EXPECT_THROW((Square{-2}), std::invalid_argument);
 }
 
 TEST(week_1_day_3, shapePointer)
