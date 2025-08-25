@@ -19,12 +19,12 @@ TEST(week_1_day_3, areas)
     Square square{3};
 
     EXPECT_EQ(rectangle.area(), 6);
-    EXPECT_EQ(circle.area(), 25 * PI);
+    EXPECT_EQ(circle.area(), 25 * std::numbers::pi);
     EXPECT_EQ(square.area(), 9);
 
     EXPECT_THROW((Rectangle{0, 0}), std::invalid_argument);
     EXPECT_THROW((Circle{-2}), std::invalid_argument);
-    EXPECT_THROW((Square{-2}), std::invalid_argument);
+    EXPECT_THROW((Square{-2}), std::invalid_argucd Dement);
 }
 
 TEST(week_1_day_3, shapePointer)
@@ -48,7 +48,7 @@ TEST(week_1_day_3, makeShape)
     EXPECT_EQ(shapes.at(0)->name(), "Rectangle");
     EXPECT_EQ(shapes.at(0)->area(), 6);
     EXPECT_EQ(shapes.at(1)->name(), "Circle");
-    EXPECT_EQ(shapes.at(1)->area(), 4 * PI);
+    EXPECT_EQ(shapes.at(1)->area(), 4 * std::numbers::pi);
     EXPECT_EQ(shapes.at(2)->name(), "Square");
     EXPECT_EQ(shapes.at(2)->area(), 9);
     shapes.clear();
@@ -56,4 +56,4 @@ TEST(week_1_day_3, makeShape)
 
 // TODO:
 // write test for wrong number of arguments for makeShape()
-// change makeShape if-else -> swith
+// change makeShape if-else -> switch

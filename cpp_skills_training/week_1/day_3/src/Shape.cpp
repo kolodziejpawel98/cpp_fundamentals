@@ -46,7 +46,7 @@ double Rectangle::area() const
 
 double Circle::area() const
 {
-    return radius * radius * PI;
+    return radius * radius * std::numbers::pi;
 }
 
 std::unique_ptr<Shape> makeShape(ShapeType shapeType, std::initializer_list<double> parameters)
