@@ -11,19 +11,30 @@ enum Permission { READ=1, WRITE=2, EXEC=4 };
 Zmień na:
 enum class Status : uint8_t { Ok, Warn, Error };
 enum class Permission : uint8_t { Read=1, Write=2, Exec=4 };
+
 Dodaj minimalny zestaw:
     • Operatory bitowe tylko dla Permission: | oraz |=.
+
     • Alias PermSet na typ bazowy Permission.
+
     • Proste API operujące na PermSet: has(PermSet, Permission) oraz set(PermSet, Permission).
+
     • Funkcje konwersji na string: to_string(Status) i to_string(Permission).
 Uwaga: bez wrappera, tylko alias. Bez &, ^, ~ — nie są wymagane w tej wersji.
 
+
 Wymagania i ograniczenia
+
     • Brak niejawnych konwersji: jeśli potrzebujesz liczby, używaj rzutowania przez typ bazowy.
+
     • Operatory | i |= mają działać wyłącznie na Permission.
+
     • PermSet to alias typu bazowego Permission (np. using PermSet = std::underlying_type_t<Permission>;).
+
     • to_string(Status) i to_string(Permission) muszą obsłużyć każdy wariant (bez „domyślnego” uciekania).
+
     • Dla „pustego zestawu” uprawnienia = PermSet{0}.
+
     • Kod kompiluje się bez ostrzeżeń w trybie „normalnym” (bez extra sanitizerów).
 
 Co dostarczyć
