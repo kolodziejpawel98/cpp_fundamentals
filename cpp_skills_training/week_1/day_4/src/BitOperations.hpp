@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <type_traits>
 
 #pragma once
 enum class Status : uint8_t
@@ -22,10 +23,8 @@ enum class Permission : uint8_t
 
 constexpr Permission operator|(Permission a, Permission b) noexcept
 {
-    uint8_t first = static_cast<uint8_t>(a);
-    uint8_t second = static_cast<uint8_t>(b);
-    uint8_t third = first | second;
-    // return a;
+    using T = std::underlying_type_t<Permission>;
+    return static_cast<Permission>(static_cast<T>(a) | static_cast<T>(b));
 }
 
 // constexpr Permission operator|=(Permission a, Permission b) noexcept
