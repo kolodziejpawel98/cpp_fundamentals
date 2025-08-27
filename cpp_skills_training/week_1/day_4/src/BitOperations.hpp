@@ -35,4 +35,6 @@ constexpr Permission &operator|=(Permission &a, Permission b) noexcept
     return a;
 }
 
-extern PermSet set(PermSet permset, Permission permission);
+[[nodiscard]] PermSet setPermissionToPermSet(PermSet permset, Permission permission) noexcept;
+
+[[nodiscard]] bool hasPermsetPermission(PermSet permset, Permission permission) noexcept;
