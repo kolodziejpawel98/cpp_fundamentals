@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "BitOperations.hpp"
 
-TEST(week_1_day_4, orOperator)
+TEST(week_1_day_4, or_operator)
 {
     using T = std::underlying_type_t<Permission>;
     EXPECT_EQ(static_cast<T>(Permission::Read), 0b00000001);
@@ -11,7 +11,7 @@ TEST(week_1_day_4, orOperator)
     EXPECT_EQ(static_cast<T>(readOrWrite), 0b00000011);
 }
 
-TEST(week_1_day_4, orOperatorWithAssignment)
+TEST(week_1_day_4, or_operator_with_assignment)
 {
     using T = std::underlying_type_t<Permission>;
 
@@ -20,7 +20,7 @@ TEST(week_1_day_4, orOperatorWithAssignment)
     EXPECT_EQ(static_cast<T>(readOrWrite), 0b00000011);
 }
 
-TEST(week_1_day_4, setMethod)
+TEST(week_1_day_4, set_method)
 {
     PermSet permSet_1 = setPermissionToPermSet(0b00000000, Permission::Read);
     EXPECT_EQ(static_cast<PermSet>(permSet_1), 0b00000001);
@@ -29,7 +29,7 @@ TEST(week_1_day_4, setMethod)
     EXPECT_EQ(static_cast<PermSet>(permSet_2), 0b00000011);
 }
 
-TEST(week_1_day_4, getMethod)
+TEST(week_1_day_4, get_method)
 {
     EXPECT_TRUE(hasPermsetPermission(0b00000111, Permission::Read));
     EXPECT_FALSE(hasPermsetPermission(0b00000110, Permission::Read));
@@ -91,4 +91,11 @@ TEST(week_1_day_4, has_idempotence_with_set_usage_example)
     ps = setPermissionToPermSet(ps, Permission::Write);
     EXPECT_TRUE(hasPermsetPermission(ps, Permission::Read));
     EXPECT_TRUE(hasPermsetPermission(ps, Permission::Write));
+}
+
+TEST(week_1_day_4, permission_to_string)
+{
+    EXPECT_EQ(permissionNameToString(Permission::Read), "Read");
+    EXPECT_EQ(permissionNameToString(Permission::Write), "Write");
+    EXPECT_EQ(permissionNameToString(Permission::Exec), "Exec");
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <type_traits>
+#include <cassert>
 
 #pragma once
 enum class Status : uint8_t
@@ -38,3 +39,19 @@ constexpr Permission &operator|=(Permission &a, Permission b) noexcept
 [[nodiscard]] PermSet setPermissionToPermSet(PermSet permset, Permission permission) noexcept;
 
 [[nodiscard]] bool hasPermsetPermission(PermSet permset, Permission permission) noexcept;
+
+[[nodiscard]] constexpr std::string_view permissionNameToString(Permission permission) noexcept
+{
+    switch (permission)
+    {
+    case Permission::Read:
+        return "Read";
+    case Permission::Write:
+        return "Write";
+    case Permission::Exec:
+        return "Exec";
+    };
+
+    assert(false && "unreachable");
+    std::terminate();
+}
