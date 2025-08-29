@@ -22,17 +22,7 @@ Dodaj minimalny zestaw:
     • Funkcje konwersji na string: to_string(Status) i to_string(Permission).
 Uwaga: bez wrappera, tylko alias. Bez &, ^, ~ — nie są wymagane w tej wersji.
 
-
-Wymagania i ograniczenia
-
-    • Brak niejawnych konwersji: jeśli potrzebujesz liczby, używaj rzutowania przez typ bazowy.
-
-    • Operatory | i |= mają działać wyłącznie na Permission.
-
-    • PermSet to alias typu bazowego Permission (np. using PermSet = std::underlying_type_t<Permission>;).
-
-    • to_string(Status) i to_string(Permission) muszą obsłużyć każdy wariant (bez „domyślnego” uciekania).
-
+Podaj 
     • Dla „pustego zestawu” uprawnienia = PermSet{0}.
 
     • Kod kompiluje się bez ostrzeżeń w trybie „normalnym” (bez extra sanitizerów).
