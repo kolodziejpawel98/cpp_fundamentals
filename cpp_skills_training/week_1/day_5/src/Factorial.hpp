@@ -9,22 +9,38 @@
 
 #pragma once
 
-constexpr unsigned long long factorialIterative(unsigned n)
+template <unsigned n>
+constexpr unsigned long long factorialIterative()
 {
-    // unsigned long long max = std::numeric_limits<unsigned long long>::max();
+    static_assert(n <= 20, "Argument produces too large factorial result for unsigned long long! (or you passed nagative number).");
 
     if (n == 0)
         return 1;
 
-    unsigned long long returnValue = 1;
+    unsigned long long result = 1;
+
     for (unsigned i = 1; i <= n; ++i)
     {
-        returnValue *= i;
-        // if (returnValue > max)
-        // {
-        //     throw std::overflow_error("unsigned long long overflow!");
-        // }
+        result *= i;
     }
 
-    return returnValue;
+    return result;
+}
+
+inline unsigned long long factorialRecursive(unsigned n)
+{
+    if (n > 20)
+        throw std::overflow_error("Argument produces too large factorial result for unsigned long long! (or you passed nagative number).");
+
+    unsigned long long result = 1;
+    if (n == 0 || n == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        result = factorialRecursive(n - 1);
+    }
+    result *= n;
+    return result;
 }

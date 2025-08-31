@@ -17,11 +17,11 @@
 
 ~~Wersja iteracyjna lub~~ rekurencyjna. Dodaj `static_assert` dla kilku wartości. Zaimplementuj też `consteval` wariant do obliczeń stricte w CT jeśli chcesz.
 
-### Wymagania i edge-case’y
+~~### Wymagania i edge-case’y~~
 
 ~~* `factorial(0)==1`.~~
-* Zabezpiecz overflow: dla `n` powyżej granicy typu zrób `throw` w czasie wykonywania lub `static_assert` w CT dla stałych (np. maksymalnie 20 dla `uint64_t`).
-* Funkcja ma być używalna w kontekście stałym: rozmiar tablicy, parametr szablonu, `std::array<N>`.
+~~* Zabezpiecz overflow: dla `n` powyżej granicy typu zrób `throw` w czasie wykonywania lub `static_assert` w CT dla stałych (np. maksymalnie 20 dla `uint64_t`).~~
+~~* Funkcja ma być używalna w kontekście stałym: rozmiar tablicy, parametr szablonu, `std::array<N>`.~~
 
 ### Co przetestować
 
@@ -32,9 +32,9 @@
 * Sprawdzenie błędu/wyjątku dla zbyt dużego `n` (tylko runtime).
 * Porównanie wyników z tabelą znanych wartości.
 
-### Rozszerzenia
+~~### Rozszerzenia~~
 
-* Dodaj `consteval factorial_ct(unsigned)` i pokaż różnicę w diagnostyce.
-* Zaimplementuj wersję na `std::uint128_t` (jeśli masz).
+~~* Dodaj `consteval factorial_ct(unsigned)` i pokaż różnicę w diagnostyce.~~
+~~* Zaimplementuj wersję na `std::uint128_t` (jeśli masz).~~
 
----
+~~---~~
