@@ -16,6 +16,11 @@ public:
         return title + " " + author.first + " " + author.second;
     }
 
+    std::string getTitle() const
+    {
+        return title;
+    }
+
 private:
     std::string title;
     std::pair<std::string, std::string> author;
@@ -23,7 +28,10 @@ private:
 
 class Reader
 {
-private:
+public:
+    Reader(std::pair<std::string, std::string> name) : name(name) {};
+
+    // private:
     std::pair<std::string, std::string> name;
     std::vector<std::shared_ptr<Book>> borrowedBooks;
 };
@@ -31,8 +39,30 @@ private:
 class Library
 {
 public:
-    std::unique_ptr<Book> addBook(std::string title, std::pair<std::string, std::string> author);
-    std::shared_ptr<Book> borrowBook(std::string title, std::pair<std::string, std::string> author);
+    [[nodiscard]] std::unique_ptr<Book> addBook(std::string title, std::pair<std::string, std::string> author)
+    {
+        return std::make_unique<Book>(title, author);
+    }
+
+    std::shared_ptr<Book> borrowBook(std::string title, std::pair<std::string, std::string> author)
+    {
+        for (auto &book : books)
+        {
+            if (book->getTitle() == title)
+            {
+                return std::make_shared<Book>(title, author);
+            }
+        }
+        throw std::invalid_argument("That book is not in the library");
+    }
+
+    std::vector<std::unique_ptr<Book>> books;
+};
+
+class Loan
+{
+public:
+    bool isValid();
 
 private:
     std::vector<std::unique_ptr<Book>> books;
