@@ -8,21 +8,21 @@
 
 Napisz prosty model systemu biblioteki:
 
-* **Książka** (`Book`)
+~~* **Książka** (`Book`)~~
 
-  * trzymana wewnętrznie w bibliotece,
-  * obiekt zarządzany przez `unique_ptr` (biblioteka ma pełną własność).
+  ~~* trzymana wewnętrznie w bibliotece,~~
+  ~~* obiekt zarządzany przez `unique_ptr` (biblioteka ma pełną własność).~~
 
-* **Czytelnik** (`Reader`)
+~~* **Czytelnik** (`Reader`)~~
 
-  * może wypożyczać książki,
-  * potrzebujesz współdzielonego dostępu, bo książka powinna istnieć dopóki ktoś ją wypożycza → użyj `shared_ptr`.
+  ~~* może wypożyczać książki,~~
+  ~~* potrzebujesz współdzielonego dostępu, bo książka powinna istnieć dopóki ktoś ją wypożycza → użyj `shared_ptr`.~~
 
-* **Wypożyczenie** (`Loan`)
+~~* **Wypożyczenie** (`Loan`)~~
 
-  * łączy czytelnika i książkę,
-  * aby nie tworzyć cyklu (Reader ↔ Loan ↔ Book), w jednym miejscu użyj `weak_ptr`.
-  * np. `Loan` może trzymać `weak_ptr<Reader>` i `weak_ptr<Book>`.
+ ~~ * łączy czytelnika i książkę,~~
+  ~~* aby nie tworzyć cyklu (Reader ↔ Loan ↔ Book), w jednym miejscu użyj `weak_ptr`.~~
+  ~~* np. `Loan` może trzymać `weak_ptr<Reader>` i `weak_ptr<Book>`.~~
 
 ---
 
@@ -38,17 +38,17 @@ Napisz prosty model systemu biblioteki:
   ~~ * ma imię,~~
    ~~* lista aktualnie wypożyczonych książek (`std::vector<std::shared_ptr<Book>>`).~~
 
-3. **Klasa `Library`**
+~~3. **Klasa `Library`**~~
 
-   * przechowuje wszystkie książki w kolekcji (np. `std::vector<std::unique_ptr<Book>>`).
-   * metoda `add_book(title, author)` zwraca wskaźnik do książki.
-   * metoda `borrow_book(reader, title)` zwraca `shared_ptr<Book>` — książka przechodzi do czytelnika, ale pozostaje też w bibliotece.
+~~   * przechowuje wszystkie książki w kolekcji (np. `std::vector<std::unique_ptr<Book>>`).~~
+  ~~ * metoda `add_book(title, author)` zwraca wskaźnik do książki.~~
+   ~~* metoda `borrow_book(reader, title)` zwraca `shared_ptr<Book>` — książka przechodzi do czytelnika, ale pozostaje też w bibliotece.~~
 
-4. **Klasa `Loan`**
+~~4. **Klasa `Loan`**~~
 
-   * przechowuje informację, kto wypożyczył którą książkę,
-   * używa `weak_ptr` do czytelnika i książki (żeby nie utrwalać obiektów sztucznie).
-   * metoda `is_valid()` sprawdza, czy obiekt czytelnika/książki nadal istnieje (`lock()`).
+~~   * przechowuje informację, kto wypożyczył którą książkę,~~
+ ~~  * używa `weak_ptr` do czytelnika i książki (żeby nie utrwalać obiektów sztucznie).~~
+~~   * metoda `is_valid()` sprawdza, czy obiekt czytelnika/książki nadal istnieje (`lock()`).~~
 
 ---
 
