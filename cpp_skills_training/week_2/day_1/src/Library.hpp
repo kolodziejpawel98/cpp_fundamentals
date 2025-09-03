@@ -9,8 +9,9 @@
 
 class Book
 {
+    friend class Library;
+
 public:
-    Book(std::string title, std::pair<std::string, std::string> author) : title(title), author(author) {};
     std::string info()
     {
         return title + " " + author.first + " " + author.second;
@@ -22,6 +23,8 @@ public:
     }
 
 private:
+    Book(std::string title, std::pair<std::string, std::string> author) : title(title), author(author) {};
+
     std::string title;
     std::pair<std::string, std::string> author;
 };
@@ -31,7 +34,22 @@ class Reader
 public:
     Reader(std::pair<std::string, std::string> name) : name(name) {};
 
-    // private:
+    void setName(std::pair<std::string, std::string> name)
+    {
+        this->name = name;
+    }
+
+    void addBorrowedBook(std::shared_ptr<Book> book)
+    {
+        borrowedBooks.push_back(book);
+    }
+
+    size_t getNumberOfBorrowedBooks() const
+    {
+        return borrowedBooks.size();
+    }
+
+private:
     std::pair<std::string, std::string> name;
     std::vector<std::shared_ptr<Book>> borrowedBooks;
 };
@@ -39,34 +57,48 @@ public:
 class Library
 {
 public:
-    [[nodiscard]] std::unique_ptr<Book> addBook(std::string title, std::pair<std::string, std::string> author)
+    void addBook(std::string title, std::pair<std::string, std::string> author)
     {
-        return std::make_unique<Book>(title, author);
+        books.push_back(std::make_unique<Book>(title, author));
     }
 
-    std::shared_ptr<Book> borrowBook(std::string title, std::pair<std::string, std::string> author)
+    void borrowBook(Reader &reader, std::string title, std::pair<std::string, std::string> author)
     {
         for (auto &book : books)
         {
             if (book->getTitle() == title)
             {
-                return std::make_shared<Book>(title, author);
+                reader.addBorrowedBook(std::make_shared<Book>(title, author));
+                return;
             }
         }
         throw std::invalid_argument("That book is not in the library");
     }
 
-    std::vector<std::unique_ptr<Book>> books;
-};
-
-class Loan
-{
-public:
-    bool isValid();
+    // std::unique_ptr<Book> getBook(std::string title) const
+    // {
+    //     for (auto &book : books)
+    //     {
+    //         if (book->getTitle() == title)
+    //         {
+    //             return ? ? ? ;
+    //         }
+    //     }
+    //     throw std::invalid_argument("That book is not in the library");
+    // }
 
 private:
     std::vector<std::unique_ptr<Book>> books;
 };
+
+// class Loan
+// {
+// public:
+//     bool isValid();
+
+// private:
+//     std::vector<std::unique_ptr<Book>> books;
+// };
 
 class Loan
 {
