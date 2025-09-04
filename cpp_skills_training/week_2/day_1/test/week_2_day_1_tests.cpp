@@ -46,11 +46,10 @@ TEST(week_2_day_1, two_people_wants_to_borrow_same_book)
     janKowalski.borrowBook(library.borrowBook("Blackout"));
     EXPECT_EQ(janKowalski.getNumberOfBorrowedBooks(), 1);
 
-    piotrNowak.borrowBook(library.borrowBook("Blackout"));
-    EXPECT_EQ(piotrNowak.getNumberOfBorrowedBooks(), 0);
+    EXPECT_THROW(piotrNowak.borrowBook(library.borrowBook("Blackout")), std::invalid_argument);
 }
 
 // TODO:
 //  - maybe Library::getBook() should get Book object instead of arguments?
 //  - Library::borrowBook() must get authors name also
-//  - change Library::books from vector<shared_ptr> to pair<shared_ptr, bool isAvailable>
+//  - add returning book to library logic
