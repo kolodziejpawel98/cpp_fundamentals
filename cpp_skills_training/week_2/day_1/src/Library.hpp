@@ -51,7 +51,6 @@ public:
 
     void borrowBook(std::shared_ptr<Book> book)
     {
-        // check nullpt?
         borrowedBooks.push_back(book);
     }
 
@@ -60,10 +59,43 @@ public:
         return borrowedBooks.size();
     }
 
+    std::shared_ptr<Book> returnBook(const std::string &title, const std::pair<std::string, std::string> &author)
+    {
+        if (borrowedBooks.size() == 0)
+            throw std::invalid_argument("You don't have any borrowed book");
+
+        auto it = std::find_if(borrowedBooks.begin(), borrowedBooks.end(),
+                               [&title, &author](const std::shared_ptr<Book> &book)
+                               {
+                                   return book->getTitle() == title && book->getAuthor() == author;
+                               });
+
+        if (it == borrowedBooks.end())
+        {
+            throw std::invalid_argument("You haven't borrowed this book");
+        }
+        else
+        {
+            auto bookToReturn = std::move(*it);
+            borrowedBooks.erase(it);
+            return bookToReturn;
+        }
+    }
+
 private:
     std::pair<std::string, std::string> name;
     std::vector<std::shared_ptr<Book>> borrowedBooks;
 };
+
+// class Borrowing
+// {
+// public:
+//     Borrowing(std::weak_ptr<Reader> reader, std::weak_ptr<Book> book) : reader(reader), book(book) {}
+
+// private:
+//     std::weak_ptr<Reader> reader;
+//     std::weak_ptr<Book> book;
+// };
 
 class Library
 {
@@ -85,12 +117,12 @@ public:
         }
     }
 
-    std::shared_ptr<Book> borrowBook(const std::string &title)
+    std::shared_ptr<Book> borrowBook(/*Reader &reader, */ const std::string &title, const std::pair<std::string, std::string> &author)
     {
         auto it = std::find_if(books.begin(), books.end(),
-                               [&title](const std::shared_ptr<Book> &book)
+                               [&title, &author](const std::shared_ptr<Book> &book)
                                {
-                                   return book->getTitle() == title;
+                                   return book->getTitle() == title && book->getAuthor() == author;
                                });
         if (it == books.end())
         {
@@ -102,8 +134,42 @@ public:
         }
         else
         {
+            // std::weak_ptr<Reader> readerWeak = std::make_shared<Reader>(reader);
+            // borrowings.emplace_back(readerWeak, *it);
             (*it)->setAvailability(false);
             return *it;
+        }
+    }
+
+    void retrieveReturnedBook(/*Reader &reader, */ std::shared_ptr<Book> returnedBook)
+    {
+        auto it = std::find(books.begin(), books.end(), returnedBook);
+
+        if (it == books.end())
+        {
+            throw std::invalid_argument("That book doesn't belong to that library.");
+        }
+        else
+        {
+
+            (*it)->setAvailability(true);
+        }
+    }
+
+    bool isBorrowingPossible(const std::string &title, const std::pair<std::string, std::string> &author)
+    {
+        auto it = std::find_if(books.begin(), books.end(),
+                               [&title, &author](const std::shared_ptr<Book> &book)
+                               {
+                                   return book->getTitle() == title && book->getAuthor() == author;
+                               });
+        if (it == books.end())
+        {
+            throw std::invalid_argument("That book doesn't belong to that library.");
+        }
+        else
+        {
+            return (*it)->getAvailability();
         }
     }
 
@@ -114,14 +180,5 @@ public:
 
 private:
     std::vector<std::shared_ptr<Book>> books;
+    // std::vector<Borrowing> borrowings;
 };
-
-// class Loan
-// {
-// public:
-//     bool isValid();
-
-// private:
-//     std::weak_ptr<Reader> reader;
-//     std::weak_ptr<Book> book;
-// };
