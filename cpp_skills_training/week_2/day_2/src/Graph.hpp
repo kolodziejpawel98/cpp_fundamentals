@@ -12,8 +12,7 @@ class Node{
     public:
     static inline int numberOfInstances = 0;
 
-    Node(int id) : id(id){numberOfInstances++;};
-    ~Node() = default;
+    Node(int id) : id(id) { numberOfInstances++; };
 
     void printNeighbors(){
         for(auto & neighbor : neighbors){
@@ -24,6 +23,12 @@ class Node{
     void addNeighbor(std::shared_ptr<Node> neighbor){
         neighbors.emplace_back(neighbor);
     }
+
+    ~Node()
+    {
+        numberOfInstances--; //????????
+    }
+
 private:
     int id;
     std::vector<std::shared_ptr<Node>> neighbors;
