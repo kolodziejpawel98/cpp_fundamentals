@@ -1,4 +1,4 @@
-Dzień 2 — shared_ptr i weak_ptr (wersja rozszerzona)
+<!-- Dzień 2 — shared_ptr i weak_ptr (wersja rozszerzona)
 
 Krok po kroku
 ~~1) Instrumentacja obiektów~~
@@ -13,7 +13,7 @@ Krok po kroku
 
 ~~Zbuduj dwa węzły a, b.~~
 
-Połącz wzajemnie: a → b i b → a (cykl).
+~~ Połącz wzajemnie: a → b i b → a (cykl). ~~
 
 Wypisz use_count() dla obu po każdym etapie: po utworzeniu, po dodaniu krawędzi, tuż przed wyjściem ze scope’a.
 
@@ -87,4 +87,4 @@ lock() zwraca pusty wskaźnik; sprawdzalne przez if (!p) ....
 
 (Opcjonalnie) Self-loop
 
-NodeS z krawędzią do siebie nie zwalnia się po wyjściu ze scope’a; NodeW zwalnia się.
+NodeS z krawędzią do siebie nie zwalnia się po wyjściu ze scope’a; NodeW zwalnia się. -->

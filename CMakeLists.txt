@@ -110,3 +110,12 @@ add_executable(week_2_day_2_tests
 target_include_directories(week_2_day_2_tests PRIVATE cpp_skills_training/week_2/day_2/src)
 target_link_libraries(week_2_day_2_tests gtest_main)
 # gtest_discover_tests(week_1_day_1_tests)
+
+
+add_executable(week_2_day_3_tests
+    cpp_skills_training/week_2/day_3/test/week_2_day_3_tests.cpp
+    cpp_skills_training/week_2/day_3/src/Document.cpp
+)
+target_include_directories(week_2_day_3_tests PRIVATE cpp_skills_training/week_2/day_3/src)
+target_link_libraries(week_2_day_3_tests gtest_main)
+# gtest_discover_tests(week_1_day_1_tests)
