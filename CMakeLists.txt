@@ -114,7 +114,7 @@ target_link_libraries(week_2_day_2_tests gtest_main)
 
 add_executable(week_2_day_3_tests
     cpp_skills_training/week_2/day_3/test/week_2_day_3_tests.cpp
-    cpp_skills_training/week_2/day_3/src/Document.cpp
+    cpp_skills_training/week_2/day_3/src/OwnMakeUnique.cpp
 )
 target_include_directories(week_2_day_3_tests PRIVATE cpp_skills_training/week_2/day_3/src)
 target_link_libraries(week_2_day_3_tests gtest_main)
