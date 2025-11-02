@@ -8,26 +8,48 @@
 
 #pragma once
 
-
-
-inline void print()
+template <typename T>
+class MyClass
 {
-    std::cout << "I am empty function and "
-            "I am called at last.\n";
-}
+public:
+    MyClass(Args &&...args) : value(std::forward<Args>(args)...) {}
 
+    // dzieki temu to zadziala
+    //     struct Point {
+    //     int x, y;
+    //     Point(int a, int b) : x(a), y(b) {}
+    // };
 
-template <typename T, typename... Types>
-void print(T var1, Types... var2)
+    // int main() {
+    //     MyClass<Point> p1(1, 2);
+    //     MyClass<Point> p2;
+    // }
+
+    // void print()
+    // {
+    //     std::cout << "a = " << a << std::endl;
+    // }
+
+private:
+    T value;
+};
+
+// template <typename T>
+// inline MyClass myOwnMakeUnique(T a)
+// {
+//     MyClass myClassObject{a};
+//     return myClassObject;
+// }
+
+// template <typename... Args>
+// inline void myOwnMakeUnique(const Args &...args)
+// {
+//     (std::cout << ... << args) << '\n';
+// }
+
+template <typename... Args>
+inline void myOwnMakeUnique(Args &&...args)
 {
-    std::cout << var1 << std::endl;
-
-    print(var2...);
+    MyClass myClassObject{std::forward<Args>(args)...};
+    // return myClassObject;
 }
-
-template <typename... Types>
-void foo(Types... var2)
-{
-  ((std::cout << var2 << std::endl), ...);
-}
-
